@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Social Media Icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="https://kit.fontawesome.com/6dffe69e1e.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <title>Hotel Marzec</title>
@@ -38,8 +40,51 @@
     </header>
     
     <main>
+        <!-- lista de habitaciones -->
+        <div class="rooms">
+            <!-- individual -->
+            <div class="room">
+                <h2 id="habitacion">Habitación Individual</h2>
+                <img src="img/individual.jpg" alt="individual">
+                <p id="precio">$800</p>
+                <button id="reservar">Reservar</button>
+            </div>
+            <!-- matrimonial -->
+            <div class="room">
+                <h2 id="habitacion">Habitación Matrimonial</h2>
+                <img src="img/matrimonial.jpg" alt="matrimonial">
+                <p id="precio">$2000</p>
+                <button id="reservar">Reservar</button>
+            </div>
+            <!-- presidencial -->
+            <div class="room">
+                <h2 id="habitacion">Suite Presidencial</h2>
+                <img src="img/presidencial.jpg" alt="presidencial">
+                <p id="precio">$5000</p>
+                <button id="reservar">Reservar</button>
+            </div>
+        </div>
+        <!-- fin de lista de habitaciones -->
 
-
+        <!-- carrito -->
+        <!-- icono -->
+        <div class="carrito">
+            <i class="fa-solid fa-cart-shopping fa-2x" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
+        </div>
+        <!-- menu desplazable -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasRightLabel">Reservas</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="list">  
+                    <ul class="ulist"></ul>
+                    <h2 class="total"></h2>
+                    <button id="borrar">Eliminar</button>
+                </div>
+            </div>
+          </div>
     </main>
 
     <!-- Inicio del footer -->
@@ -92,7 +137,9 @@
         </div>
         <!-- Copyright -->
     </footer>
+
     <!-- Scripts -->
-    <script src="js/main.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
