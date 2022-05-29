@@ -1,65 +1,82 @@
 /* variables*/
-const reservarBoton = document.querySelector("#reservar-btn")
-const reservarBoton2 = document.querySelector("#reservar-btn2")
-const reservarBoton3 = document.querySelector("#reservar-btn3")
-const vaciarBoton = document.querySelector("#borrar-btn")
-const contenedorCarrito = document.querySelector(".carrito-lista")
+const reservas = document.getElementById("rooms");
+const contenedorCarrito = document.querySelector(".carrito-lista");
 
 /* clase constructora */ 
 class Habitacion{
-    constructor(nombre, precio){
+    constructor(nombre, precio, id, img){
         this.nombre = nombre;
         this.precio = precio;  
+        this.id = id;
+        this.img = img; 
     }
 };
 
 /* tipos de habitaciones */ 
-const individual = new Habitacion("Habitación individual", 800);
-const matrimonial = new Habitacion("Habitación matrimonial", 2000);
-const presidencial = new Habitacion("Suite presidencial", 5000);
+const individual = new Habitacion("Habitación individual", 800, 1, "./img/individual.jpg");
+const matrimonial = new Habitacion("Habitación matrimonial", 2000, 2, "./img/matrimonial.jpg");
+const presidencial = new Habitacion("Suite presidencial", 5000, 3, "./img/presidencial.jpg" );
 
-/* boton reservar */
-reservarBoton.addEventListener("click", ()=> {
-    let html;
+/* array */
+const habitaciones = [individual, matrimonial, presidencial];
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    html=
-    `
-    <h3>${individual.nombre}</h3>
-    <p>Total= $${individual.precio}</p>
-    <img src="img/individual.jpg" alt="individual" width="120px" height="120px">
-    `
-    contenedorCarrito.innerHTML += html
-});
 
-reservarBoton2.addEventListener("click", ()=>{
-    let html
+/* crear habitaciones */ 
+function crearCards() {
+    habitaciones.forEach((el) => {
+        reservas.innerHTML += 
+            `<div class="room">
+                <h2>${el.nombre}</h2>
+                <img src="${el.img}" alt="">
+                <p>$${el.precio}</p>
+                <button id="btn${el.id}">Reservar</button>
+            </div>`;
+    });
 
-    html=
-    `
-    <h3>${matrimonial.nombre}</h3>
-    <p>Total= $${matrimonial.precio}</p>
-    <img src="img/matrimonial.jpg" alt="matrimonial" width="120px" height="120px">
-    `
-    contenedorCarrito.innerHTML += html
-});
+    habitaciones.forEach((hab) => {
+        document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
+          enviarCarrito(hab);
+        });
+      });
+}
 
-reservarBoton3.addEventListener("click", ()=>{
-    let html
+function enviarCarrito(hab) {
+    let existe = carrito.some((el) => el.id === hab.id);
+    if (!existe) {
+      carrito.push(hab);
+      hab.cantidad = 1;
+    } else {
+      alert("Ya tienes reservada esta Habitación")
+    }
+    pintarCarrito();
+}
+  
+function pintarCarrito() {
+    contenedorCarrito.innerHTML = "";
+    carrito.forEach((el) => {
+      contenedorCarrito.innerHTML += 
+        `<h2>${el.nombre}</h2>
+        <p>$${el.precio}</p>
+        <button id="borrar${el.id}">Borrar</button>  
+        </div>`;
+    });
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    borrarProducto();
+}
+  
+function borrarProducto() {
+    carrito.forEach((hab) => {
+      document
+        .querySelector(`#borrar${hab.id}`)
+        .addEventListener("click", () => {
+          carrito = carrito.filter((el) => el.id !== hab.id);
+          pintarCarrito();
+        });
+    });
+  }
 
-    html=
-    `
-    <h3>${presidencial.nombre}</h3>
-    <p>Total= $${presidencial.precio}</p>
-    <img src="img/presidencial.jpg" alt="matrimonial" width="120px" height="120px">
-    `
-    contenedorCarrito.innerHTML += html
-})
 
- /* boton borrar */ 
- function vaciarCarrito(){
-     contenedorCarrito.innerHTML= "";
- }
-
- vaciarBoton.addEventListener("click", ()=>{
-    vaciarCarrito();
- });
+/* iniciamos programas */ 
+crearCards();
+pintarCarrito();

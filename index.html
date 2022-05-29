@@ -18,7 +18,6 @@
         <div class="logo">
             <img src="img/logo.png" alt="hotel marzec">
         </div>
-
         <!-- barra de navegación -->
         <nav>
             <ul>
@@ -26,10 +25,10 @@
                     <a href="">HOME</a>
                 </li>
                 <li>
-                    <a href="">HABITACIONES</a>
+                    <a href="#nosotros">NOSOTROS</a>
                 </li>
                 <li>
-                    <a href="">RESERVAS</a>
+                    <a href="#reservas">RESERVAS</a>
                 </li>
                 <li>
                     <a href="">CONTACTO</a>
@@ -40,31 +39,96 @@
     </header>
     
     <main>
-        <!-- lista de habitaciones -->
-        <div class="rooms">
-            <!-- individual -->
-            <div class="room">
-                <h2>Habitación Individual</h2>
-                <img src="img/individual.jpg" alt="individual">
-                <p>$800</p>
-                <button id="reservar-btn">Reservar</button>
-            </div>
-            <!-- matrimonial -->
-            <div class="room">
-                <h2>Habitación Matrimonial</h2>
-                <img src="img/matrimonial.jpg" alt="matrimonial">
-                <p>$2000</p>
-                <button id="reservar-btn2">Reservar</button>
-            </div>
-            <!-- presidencial -->
-            <div class="room">
-                <h2>Suite Presidencial</h2>
-                <img src="img/presidencial.jpg" alt="presidencial">
-                <p>$5000</p>
-                <button id="reservar-btn3">Reservar</button>
+        <!-- INTRO -->
+        <div class="intro">
+            <h1 class="intro__titulo">Bienvenido a Hotel Marzec</h1>
+            <div class="intro__img">
+                <img src="img/carrousel/1.jpg" alt="1">
             </div>
         </div>
-        <!-- fin de lista de habitaciones -->
+        <!-- NOSOTROS -->
+        <div class="nosotros" id="nosotros">
+            <h2 class="nosotros__titulo">Sobre Nosotros</h2>
+            <div class="nosotros__texto">
+                <p>Somos un Hotel elegante situado en el centro de la Ciudad de Buenos Aires. Ofrece exteriores de piedra de estilo colonial e interiores modernos. Estacionamiento incluido en todas nuestras tarifas. Vas a sentirte como en casa.</p>
+            </div>
+            <!-- reseñas de usuario cards -->
+            <h2 class="nosotros__titulo">Experiencias</h2>
+            <div class="container__cards">
+                <!-- card 1 -->
+                <div class="card">
+                    <div class="head">
+                        <div class="circle"></div>
+                        <div class="img">
+                            <img src="img/cards/1.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h3>Laura</h3>
+                        <p>Excelente calidad y precio. Hermoso lugar! el desayuno fantástico y el personal excelente</p>
+                    </div>
+                </div>
+                <!-- card 2 -->
+                <div class="card">
+                    <div class="head">
+                        <div class="circle"></div>
+                        <div class="img">
+                            <img src="img/cards/2.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h3>Camila</h3>
+                        <p>Excelente ubicación, e instalaciones, muy buena atención de todos sus empleados.  El desayuno buffet es maravilloso. Super surtido y fresco.</p>
+                    </div>
+                </div>
+                <!-- card 3 -->
+                <div class="card">
+                    <div class="head">
+                        <div class="circle"></div>
+                        <div class="img">
+                            <img src="img/cards/3.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h3>Mariano</h3>
+                        <p>Muy bien ubicado, buena atención, excelente desayuno habitaciones cómodas. Muy buena relación precio calidad.</p>
+                    </div>
+                </div>
+            </div>    
+        </div>
+
+
+        
+        <!-- RESERVAS -->
+        <!-- lista de habitaciones -->
+        <div class="reservas">
+            <h2 class="reservas__titulo">Nuestras habitaciones</h2>
+            <div class="rooms" id="rooms">
+                <!-- individual -->
+                <!-- <div class="room">
+                    <h2>Habitación Individual</h2>
+                    <img src="img/individual.jpg" alt="individual">
+                    <p>$800</p>
+                    <button id="reservar-btn">Reservar</button>
+                </div> -->
+                <!-- matrimonial -->
+                <!-- <div class="room">
+                    <h2>Habitación Matrimonial</h2>
+                    <img src="img/matrimonial.jpg" alt="matrimonial">
+                    <p>$2000</p>
+                    <button id="reservar-btn2">Reservar</button>
+                </div> -->
+                <!-- presidencial -->
+                <!-- <div class="room">
+                    <h2>Suite Presidencial</h2>
+                    <img src="img/presidencial.jpg" alt="presidencial">
+                    <p>$5000</p>
+                    <button id="reservar-btn3">Reservar</button>
+                </div> -->
+            </div>
+            <!-- fin de lista de habitaciones -->
+        </div>
+        
 
         <!-- carrito -->
         <!-- icono -->
@@ -82,10 +146,8 @@
                 <div class="carrito-lista"> 
                     
                 </div>
-                <button id="borrar-btn">Eliminar</button>
             </div>
           </div>
-          <div class="contenedor"></div>
     </main>
 
     <!-- Inicio del footer -->
