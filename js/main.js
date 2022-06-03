@@ -43,12 +43,7 @@ function crearCards() {
 
 function enviarCarrito(hab) {
     let existe = carrito.some((el) => el.id === hab.id);
-    if (!existe) {
-      carrito.push(hab);
-      hab.cantidad = 1;
-    } else {
-      alert("Ya tienes reservada esta Habitación")
-    }
+    existe ? alert("Ya tienes reservada esta Habitación") : carrito.push(hab);  hab.cantidad = 1;
     pintarCarrito();
 }
   
