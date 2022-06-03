@@ -36,14 +36,28 @@ function crearCards() {
 
     habitaciones.forEach((hab) => {
         document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
-          enviarCarrito(hab);
+            enviarCarrito(hab);
         });
-      });
+    });
 }
 
 function enviarCarrito(hab) {
     let existe = carrito.some((el) => el.id === hab.id);
-    existe ? alert("Ya tienes reservada esta Habitación") : carrito.push(hab);  hab.cantidad = 1;
+    if (!existe) {
+        carrito.push(hab);
+        hab.cantidad = 1;
+        Toastify({
+            text: "Agregado al carrito",  
+            duration: 3000  
+        }).showToast();
+    } 
+    else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '¡Ya tienes la habitación en el carrito!',
+        });
+    }
     pintarCarrito();
 }
   
@@ -62,14 +76,32 @@ function pintarCarrito() {
   
 function borrarProducto() {
     carrito.forEach((hab) => {
-      document
-        .querySelector(`#borrar${hab.id}`)
-        .addEventListener("click", () => {
-          carrito = carrito.filter((el) => el.id !== hab.id);
-          pintarCarrito();
-        });
+        document
+            .querySelector(`#borrar${hab.id}`)
+            .addEventListener("click", () => {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡Esto eliminará la reserva del carrito!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '¡Si, borrar!'
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Tu reserva ha sido cancelada.',
+                            'success'
+                        )
+                    carrito = carrito.filter((el) => el.id !== hab.id);
+                    pintarCarrito();
+                    }
+                })
+            });
     });
-  }
+};
 
 
 /* iniciamos programas */ 
