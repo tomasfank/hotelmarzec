@@ -5,7 +5,7 @@ const contenedorCarrito = document.querySelector(".carrito-lista");
 /* array */
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-fetch('/../habitaciones.json')
+fetch('../../habitaciones.json')
     .then( (res) => res.json())
     .then( (habitaciones) => {
  
