@@ -2,43 +2,15 @@
 const reservas = document.getElementById("rooms");
 const contenedorCarrito = document.querySelector(".carrito-lista");
 
-/* clase constructora */ 
-// class Habitacion{
-//     constructor(nombre, precio, id, img){
-//         this.nombre = nombre;
-//         this.precio = precio;  
-//         this.id = id;
-//         this.img = img; 
-//     }
-// };
-
-/* tipos de habitaciones */ 
-// const individual = new Habitacion("Habitación individual", 800, 1, "./img/individual.jpg");
-// const matrimonial = new Habitacion("Habitación matrimonial", 2000, 2, "./img/matrimonial.jpg");
-// const presidencial = new Habitacion("Suite presidencial", 5000, 3, "./img/presidencial.jpg" );
-
 /* array */
-// const habitaciones = [individual, matrimonial, presidencial];
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-// Crear clase "Productos" para cargar productos desde el JSON 
 
-class Habitacion {
-    // Utilizo async/await para cumplir la promesa.
-    async activarHabitaciones() {
-        try {
-            let contenido = await fetch("./habitaciones.json")
-            let resultado = await contenido.json()
-            return resultado;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
-
-/* crear habitaciones */ 
-function crearCards() {
-    habitaciones.forEach((el) => {
-        reservas.innerHTML += 
+fetch('/habitaciones.json')
+    .then( (res) => res.json())
+    .then( (habitaciones) => {
+ 
+        habitaciones.forEach((el) => {
+            reservas.innerHTML += 
             `<div class="room">
                 <h2>${el.nombre}</h2>
                 <img src="${el.img}" alt="">
@@ -46,13 +18,12 @@ function crearCards() {
                 <button id="btn${el.id}">Reservar</button>
             </div>`;
     });
-
     habitaciones.forEach((hab) => {
         document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
             enviarCarrito(hab);
         });
     });
-}
+    });
 
 function enviarCarrito(hab) {
     let existe = carrito.some((el) => el.id === hab.id);
