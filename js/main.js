@@ -1,3 +1,40 @@
+/* MENU HAMBURGESA */
+function cambiarClase(){
+    let siteNav = document.getElementById('site-nav');
+        siteNav.classList.toggle('site-nav-open');
+    let menuOpen = document.getElementById('menu-toggle');
+        menuOpen.classList.toggle('menu-open');           
+}
+
+
+/* CARROUSEL */
+const grande = document.querySelector('.grande')
+const punto = document.querySelectorAll('.punto')
+
+punto.forEach( ( cadaPunto , i )=> {
+    // Asignamos un click a cadaPunto
+    punto[i].addEventListener('click',()=>{
+
+        // Guardar la posición de ese PUNTO
+        let posicion  = i
+        
+        // Calculando el espacio que debe DESPLAZARSE el contenedor GRANDE
+        let operacion = posicion * -33.33
+
+        // MOVEMOS el grande
+        grande.style.transform = `translateX(${ operacion }%)`
+
+        // Recorremos TODOS los punto
+        punto.forEach( ( cadaPunto , i )=>{
+            // Quitamos la clase ACTIVO a TODOS los punto
+            punto[i].classList.remove('activo')
+        })
+        // Añadir la clase activo en el punto que hemos hecho CLICK
+        punto[i].classList.add('activo')
+    })
+})
+
+/* CARRITO */
 /* variables*/
 const reservas = document.getElementById("rooms");
 const contenedorCarrito = document.querySelector(".carrito-lista");

@@ -174,7 +174,7 @@ header::after{
 }
 .nosotros__texto{
     width: 800px;
-    margin: 30px 30px;
+    margin: 20px 30px 80px 30px;
 }
 .nosotros__texto p{
     text-align: center;
