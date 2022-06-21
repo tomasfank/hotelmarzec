@@ -22,32 +22,56 @@
             <img src="img/logo.png" alt="hotel marzec">
         </div>
         <!-- barra de navegación -->
-        <nav>
+        <nav id="site-nav" class="site-nav">
             <ul>
                 <li>
-                    <a href="">HOME</a>
+                    <a href="">
+                        <i class="fa-solid fa-house site-nav--icon"></i>HOME
+                    </a>
                 </li>
                 <li>
-                    <a href="#nosotros">NOSOTROS</a>
+                    <a href="#nosotros">
+                        <i class="fa-solid fa-user-group site-nav--icon"></i>NOSOTROS
+                    </a>
                 </li>
                 <li>
-                    <a href="#reservas">RESERVAS</a>
+                    <a href="#reservas">
+                        <i class="fa-solid fa-book site-nav--icon"></i>RESERVAS
+                    </a>
                 </li>
                 <li>
-                    <a href="">CONTACTO</a>
+                    <a href="">
+                        <i class="fa-solid fa-phone site-nav--icon"></i>CONTACTO
+                    </a>
                 </li>
             </ul>
         </nav>
+        <div id="menu-toggle" class="menu-toggle" onClick="cambiarClase()">
+            <div class="hamburger"></div>
+        </div>
         <!-- fin de barra de navegación -->
     </header>
     
     <main>
         <!-- INTRO -->
-        <div class="intro">
+        <!-- <div class="intro">
             <h1 class="intro__titulo">Bienvenido a Hotel Marzec</h1>
             <div class="intro__img">
                 <img src="img/carrousel/1.jpg" alt="1">
             </div>
+        </div> -->
+        <div class="carrousel">
+            <div class="grande">
+                <img src="img/carrousel/1.jpg" alt="imagen 1" class="img">
+                <img src="img/carrousel/2.jpg" alt="imagen 2" class="img">
+                <img src="img/carrousel/3.jpg" alt="imagen 3" class="img">
+            </div>
+    
+            <ul class="puntos">
+                <li class="punto activo"></li>
+                <li class="punto"></li>
+                <li class="punto"></li>
+            </ul>
         </div>
         <!-- NOSOTROS -->
         <div class="nosotros" id="nosotros">
@@ -208,7 +232,9 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
+    <script src="js/menu.js"></script>
+    <script src="js/carrousel.js"></script>
     <script src="js/main.js"></script>
+    
 </body>
 </html>
