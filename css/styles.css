@@ -343,6 +343,7 @@ footer{
 /* Carrousel */
 .carrousel{
         width: 100%;
+        overflow: hidden;
 }
 
 .carrousel li{
