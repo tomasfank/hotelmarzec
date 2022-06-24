@@ -44,8 +44,8 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 function crearCards(){
     fetch('./habitaciones.json')
-        .then( (res) => res.json())
-        .then( (habitaciones) => {
+        .then(res => res.json())
+        .then((habitaciones) => {
     
             habitaciones.forEach((el) => {
                 reservas.innerHTML += 
