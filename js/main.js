@@ -42,25 +42,27 @@ const contenedorCarrito = document.querySelector(".carrito-lista");
 /* array */
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-fetch("../habitaciones.json")
-    .then( (res) => res.json())
-    .then( (habitaciones) => {
- 
-        habitaciones.forEach((el) => {
-            reservas.innerHTML += 
-            `<div class="room">
-                <h2>${el.nombre}</h2>
-                <img src="${el.img}" alt="">
-                <p>$${el.precio}</p>
-                <button id="btn${el.id}">Reservar</button>
-            </div>`;
-    });
-    habitaciones.forEach((hab) => {
-        document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
-            enviarCarrito(hab);
+function crearCards(){
+    fetch('./habitaciones.json')
+        .then( (res) => res.json())
+        .then( (habitaciones) => {
+    
+            habitaciones.forEach((el) => {
+                reservas.innerHTML += 
+                `<div class="room">
+                    <h2>${el.nombre}</h2>
+                    <img src="${el.img}" alt="">
+                    <p>$${el.precio}</p>
+                    <button id="btn${el.id}">Reservar</button>
+                </div>`;
         });
-    });
-    });
+        habitaciones.forEach((hab) => {
+            document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
+                enviarCarrito(hab);
+            });
+        });
+        });
+};
 
 function enviarCarrito(hab) {
     let existe = carrito.some((el) => el.id === hab.id);
