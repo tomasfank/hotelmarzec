@@ -143,6 +143,24 @@
                     <div class="modal-body">
                         <div class="carrito-lista"> 
                             <!-- Acá se guardan las habitaciones agregadas al carritos -->
+                            <div class="container">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Habitación</th>
+                                      <th scope="col">Noches</th>
+                                      <th scope="col">Acción</th>
+                                      <th scope="col">Total</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="items"></tbody>
+                                  <tfoot>
+                                    <tr id="footer">
+                                      <th scope="row" colspan="5">Carrito vacío</th>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -228,6 +246,43 @@
         </div>
         <!-- Copyright -->
     </footer>
+
+    <!-- templates cards -->
+    <template id="template-cards">
+        <div class="room">
+            <h2>titulo</h2>
+            <img src="" alt="">
+            <p>$<span>1000</span></p>
+            <button class="button">Reservar</button>
+        </div>
+    </template>
+    <!-- footer del carrito -->
+    <template id="template-footer">
+        <th scope="row" colspan="2">Total noches reservadas</th>
+        <td>10</td>
+        <td>
+            <button class="btn btn-danger btn-sm" id="vaciar-carrito">
+                vaciar todo
+            </button>
+        </td>
+        <td class="font-weight-bold">$ <span>5000</span></td>
+    </template>
+    <!-- carrito -->
+    <template id="template-carrito">
+      <tr>
+        <td>Café</td>
+        <td>1</td>
+        <td>
+            <button class="btn btn-info btn-sm">
+                +
+            </button>
+            <button class="btn btn-danger btn-sm">
+                -
+            </button>
+        </td>
+        <td>$ <span>500</span></td>
+      </tr>
+    </template>
 
     <!-- Scripts -->
     <script src="bootstrap/js/bootstrap.min.js"></script>

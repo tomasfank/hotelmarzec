@@ -1,20 +1,20 @@
 [
     {
         "nombre": "Habitación individual",
-        "precio": "800",
-        "id": "1",
+        "precio": 1000,
+        "id": 1,
         "img": "img/individual.jpg"
     },
     {
         "nombre": "Habitación matrimonial",
-        "precio": "2000",
-        "id": "2",
+        "precio": 2000,
+        "id": 2,
         "img": "img/matrimonial.jpg"
     },
     {
         "nombre": "Suite Presidencial",
-        "precio": "5000",
-        "id": "3",
+        "precio": 5000,
+        "id": 3,
         "img": "img/presidencial.jpg"
     }
 ]

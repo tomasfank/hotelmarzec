@@ -7,6 +7,11 @@ function cambiarClase(){
 }
 
 
+
+
+
+
+
 /* CARROUSEL */
 const grande = document.querySelector('.grande')
 const punto = document.querySelectorAll('.punto')
@@ -34,110 +39,180 @@ punto.forEach( ( cadaPunto , i )=> {
     })
 })
 
+
+
+
+
+
 /* CARRITO */
-/* variables*/
-const reservas = document.getElementById("rooms");
-const contenedorCarrito = document.querySelector(".carrito-lista");
-document.addEventListener('DOMContentLoaded')
+/* variables principales*/
+const rooms = document.getElementById("rooms");
+const footer = document.getElementById('footer');
+const reservar = document.querySelector('.btn-success');
+const templateCard = document.getElementById('template-cards').content;
+const templateFooter = document.getElementById('template-footer').content;
+const templateCarrito = document.getElementById('template-carrito').content;
+const fragment = document.createDocumentFragment();
+let carrito = {}
 
 
-/* array */
-let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-const fetchData = async() => {
+/* funcion que va a cargar el contenido en el DOM */
+document.addEventListener('DOMContentLoaded', () => {
+    fetchData();
+    if (localStorage.getItem('carrito')) {
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        pintarCarrito()
+    };
+}); 
+/* evento btn reservar */ 
+rooms.addEventListener('click', e => { addCarrito(e) });
+/* evento para btn de incrementar y diminuir */ 
+items.addEventListener('click', e => { btnAumentarDisminuir(e) })
+/* Utilizo async/await para cumplir la promesa. */
+const fetchData = async () => {
     try {
         const res = await fetch('./habitaciones.json')
-        const data = await res.json()
+        const data = await res.json() 
+        
+        pintarCards(data)
     }   catch (error) {
         console.log(error)
     }
 }
-
-function crearCards(){
-    fetch('./habitaciones.json')
-        .then(res => res.json())
-        .then((habitaciones) => {
-    
-            habitaciones.forEach((el) => {
-                reservas.innerHTML += 
-                `<div class="room">
-                    <h2>${el.nombre}</h2>
-                    <img src="${el.img}" alt="">
-                    <p>Por noche: $${el.precio}</p>
-                    <button id="btn${el.id}">Reservar</button>
-                </div>`;
-        });
-        habitaciones.forEach((hab) => {
-            document.querySelector(`#btn${hab.id}`).addEventListener("click", () => {
-                enviarCarrito(hab);
-            });
-        });
-        });
+/* pintamos el carrito utilizando fragment */
+const pintarCards = data => {
+    data.forEach(producto =>{
+        
+        templateCard.querySelector('h2').textContent = producto.nombre
+        templateCard.querySelector('span').textContent = producto.precio
+        templateCard.querySelector('.button').dataset.id = producto.id
+        templateCard.querySelector('img').setAttribute("src", producto.img)
+        const clone = templateCard.cloneNode(true)
+        fragment.appendChild(clone)
+    });
+    rooms.appendChild(fragment)
 };
 
-function enviarCarrito(hab) {
-    let existe = carrito.some((el) => el.id === hab.id);
-    if (!existe) {
-        carrito.push(hab);
-        hab.cantidad = 1;
+const addCarrito = e => {
+    if (e.target.classList.contains('button')) {
+        setCarrito(e.target.parentElement);
         Toastify({
             text: "Agregado al carrito",  
             duration: 3000  
         }).showToast();
-    } 
-    else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '¡Ya tienes la habitación en el carrito!',
-        });
     }
-    pintarCarrito();
+    e.stopPropagation()
+};
+
+const setCarrito = objeto => {
+    const producto = {
+        title: objeto.querySelector('h2').textContent,
+        precio: objeto.querySelector('span').textContent,
+        id: objeto.querySelector('.button').dataset.id,
+        cantidad: 1
+    }
+    console.log(producto)
+    if (carrito.hasOwnProperty(producto.id)) {
+        producto.cantidad = carrito[producto.id].cantidad + 1
+    }
+
+    carrito[producto.id] = { ...producto }
+    
+    pintarCarrito()
 }
-  
-function pintarCarrito() {
-    contenedorCarrito.innerHTML = "";
-    carrito.forEach((el) => {
-      contenedorCarrito.innerHTML += 
-        `<h2>${el.nombre}</h2>
-        <p>$${el.precio}</p>
-        <button id="borrar${el.id}">Borrar</button>  
-        </div>`;
-    });
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-    borrarProducto();
+
+/* pintamos el carrito con la habitacion seleccionada */
+const pintarCarrito = () => {
+    items.innerHTML = ''
+
+    Object.values(carrito).forEach(producto => {
+        
+        templateCarrito.querySelectorAll('td')[0].textContent = producto.title
+        templateCarrito.querySelectorAll('td')[1].textContent = producto.cantidad
+        templateCarrito.querySelector('span').textContent = producto.precio * producto.cantidad
+        
+        //botones
+        templateCarrito.querySelector('.btn-info').dataset.id = producto.id
+        templateCarrito.querySelector('.btn-danger').dataset.id = producto.id
+
+        const clone = templateCarrito.cloneNode(true)
+        fragment.appendChild(clone)
+    })
+    items.appendChild(fragment)
+
+    pintarFooter()
+    /* guardamos la infomración del carrito en el localstorage */ 
+    localStorage.setItem('carrito', JSON.stringify(carrito))
 }
-  
-function borrarProducto() {
-    carrito.forEach((hab) => {
-        document
-            .querySelector(`#borrar${hab.id}`)
-            .addEventListener("click", () => {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¡Esto eliminará la reserva del carrito!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '¡Si, borrar!'
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            '¡Eliminado!',
-                            'Tu reserva ha sido cancelada.',
-                            'success'
-                        )
-                    carrito = carrito.filter((el) => el.id !== hab.id);
-                    pintarCarrito();
-                    }
-                })
-            });
+
+const pintarFooter = () => {
+    footer.innerHTML = ''
+    
+    if (Object.keys(carrito).length === 0) {
+        footer.innerHTML = `
+        <th scope="row" colspan="5">Carrito vacío</th>
+        `
+        return
+    }
+    
+    /* sumar cantidad y sumar totales */
+    const nCantidad = Object.values(carrito).reduce((acc, { cantidad }) => acc + cantidad, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio ,0)
+    
+
+    templateFooter.querySelectorAll('td')[0].textContent = nCantidad
+    templateFooter.querySelector('span').textContent = nPrecio
+
+    const clone = templateFooter.cloneNode(true)
+    fragment.appendChild(clone)
+
+    footer.appendChild(fragment)
+
+    const boton = document.querySelector('#vaciar-carrito')
+    boton.addEventListener('click', () => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esto eliminará la reserva del carrito!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, borrar!'
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    '¡Eliminado!',
+                    'Tu reserva ha sido cancelada.',
+                    'success'
+                )
+                carrito = {}
+                pintarCarrito()
+            };
+        });
     });
 };
 
+/* boton para incrementar y disminuir la cantidad de noches reservadas */ 
+const btnAumentarDisminuir = e => {
+    if (e.target.classList.contains('btn-info')) {
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad++
+        carrito[e.target.dataset.id] = { ...producto }
+        pintarCarrito()
+    }
 
-/* iniciamos programas */ 
-crearCards();
-pintarCarrito();
+    if (e.target.classList.contains('btn-danger')) {
+        const producto = carrito[e.target.dataset.id]
+        producto.cantidad--
+        if (producto.cantidad === 0) {
+            delete carrito[e.target.dataset.id]
+        } else {
+            carrito[e.target.dataset.id] = {...producto}
+        }
+        pintarCarrito()
+    }
+    e.stopPropagation()
+}
+
+
