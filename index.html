@@ -53,13 +53,7 @@
     </header>
     
     <main>
-        <!-- INTRO -->
-        <!-- <div class="intro">
-            <h1 class="intro__titulo">Bienvenido a Hotel Marzec</h1>
-            <div class="intro__img">
-                <img src="img/carrousel/1.jpg" alt="1">
-            </div>
-        </div> -->
+        <!-- CARROUSEL -->
         <div class="carrousel">
             <div class="grande">
                 <img src="img/carrousel/1.jpg" alt="imagen 1" class="img">
@@ -129,50 +123,59 @@
         <div class="reservas" id="reservas">
             <h2 class="reservas__titulo">Nuestras habitaciones</h2>
             <div class="rooms" id="rooms">
-                <!-- individual -->
-                <!-- <div class="room">
-                    <h2>Habitación Individual</h2>
-                    <img src="img/individual.jpg" alt="individual">
-                    <p>$800</p>
-                    <button id="reservar-btn">Reservar</button>
-                </div> -->
-                <!-- matrimonial -->
-                <!-- <div class="room">
-                    <h2>Habitación Matrimonial</h2>
-                    <img src="img/matrimonial.jpg" alt="matrimonial">
-                    <p>$2000</p>
-                    <button id="reservar-btn2">Reservar</button>
-                </div> -->
-                <!-- presidencial -->
-                <!-- <div class="room">
-                    <h2>Suite Presidencial</h2>
-                    <img src="img/presidencial.jpg" alt="presidencial">
-                    <p>$5000</p>
-                    <button id="reservar-btn3">Reservar</button>
-                </div> -->
+                <!-- Acá están contenidas las cards -->
             </div>
             <!-- fin de lista de habitaciones -->
+            <!-- Icono carrito -->
+            <div class="carrito">
+                <i class="fa-solid fa-cart-shopping fa-2x" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+            </div>
         </div>
         
-
-        <!-- carrito -->
-        <!-- icono -->
-        <div class="carrito">
-            <i class="fa-solid fa-cart-shopping fa-2x" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
-        </div>
-        <!-- menu desplazable -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasRightLabel">Reservas</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <!-- Carrito -->
-                <div class="carrito-lista"> 
-                    
+        <!-- modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Carrito</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="carrito-lista"> 
+                            <!-- Acá se guardan las habitaciones agregadas al carritos -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success">Confirmar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
-          </div>
+        </div>
+
+          <!-- Formulario -->
+          <h2 class="titulo-contacto">También podes escribirnos a través de este formulario:</h2>
+          <div class="container">
+            <form action="">
+                <!-- nombre -->
+                <label for="nombre_apellido" class="form-label">Nombre y Apellido</label>
+                <input type="text" required class="form-control" id="nombre_apellido" placeholder="NOMBRE Y APELLIDO">
+                <!-- correo -->
+                <label for="correo" class="form-label">Correo electrónico</label>
+                <input type="email" required class="form-control" id="correo" placeholder="CORREO">
+                <!-- telefono -->
+                <label for="telefono" class="form-label">Número de Teléfono</label>
+                <input type="text" required class="form-control" id="telefono" placeholder="TELEFONO">
+                <!-- asunto -->
+                <label for="asunto" class="form-label">Asunto</label>
+                <input type="text" required class="form-control" id="asunto" placeholder="ASUNTO">
+                <!-- mensaje -->
+                <label for="mensaje" class="form-label">Escriba su mensaje</label>
+                <textarea class="form-control" required id="mensaje" rows="3"></textarea>
+                <!-- boton -->
+                <button type="submit" class="btn btn-outline-success m-3">Enviar</button>
+            </form>
+        </div>
     </main>
 
     <!-- Inicio del footer -->

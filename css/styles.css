@@ -173,11 +173,21 @@ header::after{
     text-align: center;
 }
 .nosotros__texto{
-    width: 800px;
-    margin: 20px 30px 80px 30px;
-}
+    width: auto;
+    margin: 20px 50px 80px 50px;}
+        @media only screen and (min-width: 0px) and (max-width: 767px) {
+            .nosotros__texto {
+            font-size: 1rem;} }
+        @media only screen and (min-width: 768px) and (max-width: 991px) {
+            .nosotros__texto {
+            font-size: 1.2rem; } }
+        @media (min-width: 992px) {
+            .nosotros__texto {
+            font-size: 1.6rem; } }
+
 .nosotros__texto p{
     text-align: center;
+    padding: 0px 30px;
 }
 
 
@@ -265,17 +275,24 @@ header::after{
     display: flex;
     flex-direction: column;
     margin: 20px 50px;
+    box-shadow: 1px 1px 5px black;
 }
 .rooms .room h2{
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.1rem;
+}
+.rooms .room p{
+    margin: 5px;
+    text-align: center;
 }
 .rooms .room img{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
 }
 .rooms .room button{
-    background-color: rgb(99, 187, 99);
+    border-style: hidden;
+    font-weight: 500;
+    background-color: #92B4EC;
 }
 .rooms .room button:hover{
     transform: translateY(2px);
@@ -287,7 +304,6 @@ header::after{
     display: flex;
     width: 100%;
     justify-content: end;
-    position: fixed;
     bottom: 50px; 
 }
 .carrito i{
@@ -388,4 +404,15 @@ footer{
     transform: translateY(-10px);
   }
 
-
+  .titulo-contacto{
+    text-align: center;
+  }
+    @media only screen and (min-width: 0px) and (max-width: 767px) {
+    .titulo-contacto {
+    font-size: 1.1rem;} }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .titulo-contacto {
+    font-size: 1.5rem; } }
+    @media (min-width: 992px) {
+    .titulo-contacto {
+    font-size: 2rem; } }

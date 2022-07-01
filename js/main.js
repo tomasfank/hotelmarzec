@@ -38,9 +38,20 @@ punto.forEach( ( cadaPunto , i )=> {
 /* variables*/
 const reservas = document.getElementById("rooms");
 const contenedorCarrito = document.querySelector(".carrito-lista");
+document.addEventListener('DOMContentLoaded')
+
 
 /* array */
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+const fetchData = async() => {
+    try {
+        const res = await fetch('./habitaciones.json')
+        const data = await res.json()
+    }   catch (error) {
+        console.log(error)
+    }
+}
 
 function crearCards(){
     fetch('./habitaciones.json')
@@ -52,7 +63,7 @@ function crearCards(){
                 `<div class="room">
                     <h2>${el.nombre}</h2>
                     <img src="${el.img}" alt="">
-                    <p>$${el.precio}</p>
+                    <p>Por noche: $${el.precio}</p>
                     <button id="btn${el.id}">Reservar</button>
                 </div>`;
         });
